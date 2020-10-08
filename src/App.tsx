@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from "react";
+import LogInRegister from "./components/auth/Login/login-register";
+import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
+import Dashboard from "./containers/dashboard/dashboard";
+// import styles from './App.module.css';
 
-function App() {
+const App = () => {
+
+  const [isAuth, setIsAuth] = useState(true);
+
+  const routeGuard = (Component: any): any => {
+    return isAuth ? <Component /> : <Redirect to="/auth" />;
+  };
+  
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div
+        style={{
+          width: "50%",
+          margin: "auto",
+        }}
+      >
+        <Switch>
+          <Route path="/" exact render={() => routeGuard(Dashboard)} />
+          <Route path="/auth" component={LogInRegister}/>
+        </Switch>
+      </div>
+    </BrowserRouter>
   );
 }
 
