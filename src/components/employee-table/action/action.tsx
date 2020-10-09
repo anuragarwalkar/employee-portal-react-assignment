@@ -1,8 +1,8 @@
 import React from 'react';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
-import EditIcon from '@material-ui/icons/Edit';
-import Fab from '@material-ui/core/Fab';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Button } from '@material-ui/core';
 
 export default ({items}: {items: {name: string, id: number} []}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -17,9 +17,9 @@ export default ({items}: {items: {name: string, id: number} []}) => {
 
   return (
     <div>
-     <Fab color="primary" onClick={handleClick} size="small" aria-label="edit">
-      <EditIcon />
-      </Fab>
+      <Button onClick={handleClick}>
+      <MoreVertIcon  />
+      </Button>
       <Menu
         id="simple-menu"
         anchorEl={anchorEl}

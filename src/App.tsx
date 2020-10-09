@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import LogInRegister from "./components/auth/Login/login-register";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./containers/dashboard/dashboard";
+import Layout from "./hoc/layout/layout";
+import Auth from "./containers/auth/auth";
 // import styles from './App.module.css';
 
 const App = () => {
@@ -14,7 +15,7 @@ const App = () => {
   
   return (
     <BrowserRouter>
-      <div
+      <Layout
         style={{
           width: "50%",
           margin: "auto",
@@ -22,9 +23,9 @@ const App = () => {
       >
         <Switch>
           <Route path="/" exact render={() => routeGuard(Dashboard)} />
-          <Route path="/auth" component={LogInRegister}/>
+          <Route path="/auth" component={Auth}/>
         </Switch>
-      </div>
+      </Layout>
     </BrowserRouter>
   );
 }
