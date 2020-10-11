@@ -21,6 +21,5 @@ export const logoutSucceed = () => {
 }
 
 export const auth = (email: string, password: string, fullName: string, method: "sign-in" | "sign-up") => {
-    console.log('email:', email)
     return { type: AUTH_USER, payload: { email, password, fullName, method} }
 }

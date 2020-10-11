@@ -6,6 +6,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
+        minHeight: '400px',
+        justifyContent: 'center'
     },
     avatar: {
         margin: theme.spacing(1),

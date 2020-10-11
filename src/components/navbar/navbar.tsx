@@ -7,6 +7,9 @@ import IconButton from '@material-ui/core/IconButton';
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
+import {connect} from 'react-redux';
+import { RootState } from '../../models/rootState.model';
+import { logout } from '../../store/actions/auth';
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -22,9 +25,8 @@ const useStyles = makeStyles((theme: Theme) =>
   }),
 );
 
-const NavBar = () => {
+const NavBar = ({isAuthenticated, fullName, onLogout}: {isAuthenticated?: boolean, fullName?: string, onLogout?: any}) => {
   const classes = useStyles();
-  const [auth, setAuth] = React.useState(true);
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
@@ -36,6 +38,11 @@ const NavBar = () => {
     setAnchorEl(null);
   };
 
+  const handleLogout = () => {
+    handleClose();
+    onLogout();
+  }
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
@@ -43,9 +50,9 @@ const NavBar = () => {
           <Typography variant="h6" className={classes.title}>
             Employee Portal
           </Typography>
-          {auth && (
+          {isAuthenticated && (
             <div>
-               <span>Anurag Arwalkar</span>
+               <span>{fullName}</span>
               <IconButton
                 aria-label="account of current user"
                 aria-controls="menu-appbar"
@@ -70,7 +77,7 @@ const NavBar = () => {
                 open={open}
                 onClose={handleClose}
               >
-                <MenuItem onClick={handleClose}>Log out</MenuItem>
+                <MenuItem onClick={handleLogout}>Log out</MenuItem>
               </Menu>
             </div>
           )}
@@ -80,4 +87,21 @@ const NavBar = () => {
   );
 }
 
-export default NavBar;
+const mapStateToProps = (state: RootState) => {
+  const { token, fullName } = state.auth;
+
+  return {
+    isAuthenticated: token !== '',
+    fullName
+  }
+}
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onLogout: () => {
+      dispatch(logout())
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar);

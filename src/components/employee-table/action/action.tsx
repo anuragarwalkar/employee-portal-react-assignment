@@ -4,15 +4,16 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import { Button } from '@material-ui/core';
 
-export default ({items}: {items: {name: string, id: number} []}) => {
+const Action = ({items, onAction}: {items: {name: string, id: number} [], onAction: (actionType: string) => void}) => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
   };
 
-  const handleClose = () => {
+  const handleClose = (actionTYpe: string) => {
     setAnchorEl(null);
+    onAction(actionTYpe);
   };
 
   return (
@@ -21,14 +22,16 @@ export default ({items}: {items: {name: string, id: number} []}) => {
       <MoreVertIcon  />
       </Button>
       <Menu
-        id="simple-menu"
+        id="actions-menu"
         anchorEl={anchorEl}
         keepMounted
         open={Boolean(anchorEl)}
         onClose={handleClose}
       >
-        {items.map((item) => <MenuItem key={item.id} onClick={handleClose}>{item.name}</MenuItem> )}
+        {items.map((item) => <MenuItem key={item.id} onClick={() => handleClose(item.name)}>{item.name}</MenuItem> )}
       </Menu>
     </div>
   );
 }
+
+export default Action;

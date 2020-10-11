@@ -1,26 +1,21 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import Dashboard from "./containers/dashboard/dashboard";
 import Layout from "./hoc/layout/layout";
 import Auth from "./containers/auth/auth";
-// import styles from './App.module.css';
+import { RootState } from "./models/rootState.model";
+import { connect } from 'react-redux';
+import styles from './App.module.css';
 
-const App = () => {
-
-  const [isAuth, setIsAuth] = useState(true);
+const App = ({isAuthenticated}: {isAuthenticated: boolean}) => {
 
   const routeGuard = (Component: any): any => {
-    return isAuth ? <Component /> : <Redirect to="/auth" />;
+    return isAuthenticated ? <Component /> : <Redirect to="/auth" />;
   };
   
   return (
     <BrowserRouter>
-      <Layout
-        style={{
-          width: "50%",
-          margin: "auto",
-        }}
-      >
+      <Layout className={styles.app}>
         <Switch>
           <Route path="/" exact render={() => routeGuard(Dashboard)} />
           <Route path="/auth" component={Auth}/>
@@ -30,4 +25,12 @@ const App = () => {
   );
 }
 
-export default App;
+const mapStateToProps = (state: RootState) => {
+  const { token } = state.auth;
+
+  return {
+    isAuthenticated: token !== ''
+  }
+}
+
+export default connect(mapStateToProps)(App);

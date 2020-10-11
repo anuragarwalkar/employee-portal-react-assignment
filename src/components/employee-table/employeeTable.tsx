@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -11,6 +11,11 @@ import Action from "./action/action";
 import Button from "@material-ui/core/Button";
 import AddIcon from "@material-ui/icons/Add";
 import styles from './employeeTable.module.scss';
+import { Employee } from "../../models/employee.model";
+import CircularProgress from '@material-ui/core/CircularProgress';
+import tableHeader from './employeeTableHeader';
+import { connect } from "react-redux";
+import { deleteEmployee } from "../../store/actions/employee";
 
 const actionItems = [
   { name: "Edit", id: 1 },
@@ -23,31 +28,37 @@ const useStyles = makeStyles({
   },
 });
 
-function createData(
-  name: string,
-  empCode: number,
-  projectAssigned: string,
-  techStack: string
-) {
-  return { name, empCode, projectAssigned, techStack };
+interface employeeTableProps {
+  addNew: (type: boolean, employee?: any) => void;
+  employees: Employee[];
+  loading: boolean;
+  onDeleteEmployee?: any;
+  onEditEmployee?: any
 }
 
-const rows = [
-  createData("Anurag Arwalkar", 159, "GCP", "sveltejs"),
-  createData("Sayali Bujade", 237, "Git Scm", "Vue"),
-];
-
-const EmployeeTable = ({addNew}: {addNew: () => void}) => {
+const EmployeeTable = (props: employeeTableProps) => {
   const classes = useStyles();
 
-  return (
-    <div className={styles.employeeTable}>
+  const onChangeAction = (actionType: string, item: Employee) => {
+    if (actionType === 'delete') {
+      props.onDeleteEmployee(item._id);
+    }
+
+    if(actionType === 'edit') {
+      props.addNew(true, item);
+    }
+  }
+
+  let content = null;
+
+  if(!props.loading) {
+    content = <Fragment>
       <div className={styles.employeeTableHeader}>
       <Button
         variant="contained"
         color="primary"
         startIcon={<AddIcon />} 
-        onClick={addNew} >
+        onClick={() => props.addNew(false)} >
         Add New
       </Button>
       </div>
@@ -55,32 +66,44 @@ const EmployeeTable = ({addNew}: {addNew: () => void}) => {
         <Table className={classes.table} aria-label="simple table">
           <TableHead>
             <TableRow>
-              <TableCell>Name</TableCell>
-              <TableCell align="right">Emp Code</TableCell>
-              <TableCell align="right">Project assigned</TableCell>
-              <TableCell align="right">Technology Stack</TableCell>
-              <TableCell align="right">Action</TableCell>
+              {tableHeader.map(header=> <TableCell key={header.key} align={header.align as 'left' | 'right' | 'center'}>{header.name}</TableCell>)}
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map((row) => (
-              <TableRow key={row.name}>
+            {props.employees.map((row: any) => (
+              <TableRow key={row._id}>
                 <TableCell component="th" scope="row">
-                  {row.name}
+                  {row.fullName}
                 </TableCell>
-                <TableCell align="right">{row.empCode}</TableCell>
-                <TableCell align="right">{row.projectAssigned}</TableCell>
-                <TableCell align="right">{row.techStack}</TableCell>
-                <TableCell align="right">
-                  <Action items={actionItems} />
+                <TableCell align="left">{row._id}</TableCell>
+                <TableCell align="left">{row.projectAssigned}</TableCell>
+                <TableCell align="left">{row.technologyStack}</TableCell>
+                <TableCell align="left">
+                  <Action onAction={(actionType: string) => onChangeAction(actionType.toLowerCase(), row)} items={actionItems} />
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
+    </Fragment>
+  } else {
+    content = <CircularProgress size={100} />
+  }
+
+  return (
+    <div className={styles.employeeTable}>
+      {content}
     </div>
   );
 }
 
-export default EmployeeTable;
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    onDeleteEmployee: (employeeId: string) => {
+      dispatch(deleteEmployee(employeeId))
+    }
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EmployeeTable);

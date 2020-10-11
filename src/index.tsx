@@ -7,7 +7,8 @@ import { createStore, applyMiddleware, compose, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import createSagaMiddlware from 'redux-saga';
 import auth from './store/reducers/auth';
-import { watchAuth } from "./store/sagas";
+import employee from './store/reducers/employee';
+import { watchAuth, watchEmployee } from "./store/sagas";
 
 declare global {
   interface Window {
@@ -19,14 +20,9 @@ const sagaMiddlware = createSagaMiddlware()
 
 const middlwares = [sagaMiddlware];
 
-const reducers = { auth };
+const reducers = { auth, employee };
 
-const reduxDevTools: any =
-  process.env.NODE_ENV === "development"
-    ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
-    : null || compose;
-
-const composeEnhancers = reduxDevTools;
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 
 const rootReducer = combineReducers({ ...reducers });
 
@@ -36,6 +32,7 @@ const store = createStore(
 );
 
 sagaMiddlware.run(watchAuth);
+sagaMiddlware.run(watchEmployee);
 
 ReactDOM.render(
   <React.StrictMode>
