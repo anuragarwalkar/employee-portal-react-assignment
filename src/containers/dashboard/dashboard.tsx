@@ -1,6 +1,5 @@
 import React, { Fragment, useCallback, useEffect, useState } from "react";
 import AddEditEmployeeDialog from "../../components/employee-table/add-edit-employee/addEditEmployeeDialog";
-import ConfirmationDialog from "../../components/employee-table/confirmation-dialog/confirmationDialog";
 import EmployeeTable from "../../components/employee-table/employeeTable";
 import CustomPagination from "../../components/employee-table/paginator/pagination";
 import styles from './dashboard.module.scss';
@@ -17,7 +16,6 @@ const Dashboard = (props: any) => {
 
   const [openEmployeeDialog, setOpenEmployeeDialog] = useState(false);
   const [isEdit, setIsEdit] = useState(false);
-  const [openConfirmationDialog, setOpenConfirmationDialog] = useState(false);
   const [selectedEmployee, setSeletedEmployee] = useState(null);
 
   const getUserQuery = useCallback(() => {
@@ -53,7 +51,6 @@ const Dashboard = (props: any) => {
       </div>
       </div>
       {openEmployeeDialog && <AddEditEmployeeDialog open={openEmployeeDialog} employee={selectedEmployee} isEdit={isEdit} handleClose={() => setOpenEmployeeDialog(false)}/>}
-      <ConfirmationDialog open={openConfirmationDialog}handleClose={() => setOpenConfirmationDialog(false)} />
     </Fragment>
   );
 };

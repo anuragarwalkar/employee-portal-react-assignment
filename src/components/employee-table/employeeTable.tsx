@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
@@ -16,6 +16,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import tableHeader from './employeeTableHeader';
 import { connect } from "react-redux";
 import { deleteEmployee } from "../../store/actions/employee";
+import ConfirmationDialog from "../../components/employee-table/confirmation-dialog/confirmationDialog";
 
 const actionItems = [
   { name: "Edit", id: 1 },
@@ -38,16 +39,22 @@ interface employeeTableProps {
 
 const EmployeeTable = (props: employeeTableProps) => {
   const classes = useStyles();
+  const [openConfirmationDialog, setOpenConfirmationDialog] = useState({state: false, id: ''});
 
   const onChangeAction = (actionType: string, item: Employee) => {
     if (actionType === 'delete') {
-      props.onDeleteEmployee(item._id);
+      setOpenConfirmationDialog({state: true, id: item._id});
     }
 
     if(actionType === 'edit') {
       props.addNew(true, item);
     }
   }
+
+  const onDeleteConfirmed = (id: string) => {
+    props.onDeleteEmployee(id);
+    setOpenConfirmationDialog({state: false, id: ''});
+  } 
 
   let content = null;
 
@@ -86,6 +93,7 @@ const EmployeeTable = (props: employeeTableProps) => {
           </TableBody>
         </Table>
       </TableContainer>
+      <ConfirmationDialog open={openConfirmationDialog.state} id={openConfirmationDialog.id} onConfirm={onDeleteConfirmed} handleClose={() => setOpenConfirmationDialog({state: false, id: ''})} />
     </Fragment>
   } else {
     content = <CircularProgress size={100} />

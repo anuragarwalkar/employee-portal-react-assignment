@@ -9,9 +9,13 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 const ConfirmationDialog = ({
   open = false,
   handleClose,
+  onConfirm,
+  id
 }: {
   open: boolean;
   handleClose: () => void;
+  onConfirm: (id: string) => void;
+  id: string
 }) => {
   return (
     <Dialog open={open} aria-labelledby="employee-form-dialog-title">
@@ -25,7 +29,7 @@ const ConfirmationDialog = ({
           <Button variant="contained" color="default" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="contained" onClick={handleClose} color="secondary">
+          <Button variant="contained" onClick={()=> onConfirm(id)} color="secondary">
             Delete
           </Button>
         </DialogActions>
