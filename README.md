@@ -1,4 +1,4 @@
-# Chat Buddy
+# Employee Portal Assignment
 
 ## Description
 Front End : React 16 with React Redux-Saga & Sign in with Google (Oauth2) <br>
