@@ -1,10 +1,10 @@
 # Employee Portal Assignment
 
 ## Description
-Front End : React 16 with React Redux-Saga & Sign in with Google (Oauth2) <br>
+Front End : React 16 with React Redux-Saga, Enzyme & Sign in with Google (Oauth2) <br>
 Back End : NodeJs with Typescript, passport.js, MongoDb
 
-## UI Link
+## React 16
 
 Hosted On Firebase `https://employee-portal-f77f4.web.app`
 
