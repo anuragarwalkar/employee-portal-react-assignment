@@ -12,7 +12,7 @@ const Spinner = () => <div className={styles.absoluteCenter}><CircularProgress s
 const Auth = lazy(() => import('./containers/auth/auth'));
 const Dashboard = lazy(() => import('./containers/dashboard/dashboard'));
 
-const App = ({isAuthenticated}: {isAuthenticated: boolean}) => {
+export const App = ({isAuthenticated}: {isAuthenticated: boolean}) => {
 
   const routeGuard = (Component: any): any => {
     return isAuthenticated ? <Component /> : <Redirect to="/auth" />;
