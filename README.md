@@ -23,6 +23,7 @@ Used GitHub Action to test and build the code before merging and pushing the cod
 
 ## Screenshots (Destop)
 ![image](https://user-images.githubusercontent.com/40962778/95680650-cfbd0b80-0bf8-11eb-81fc-7bb1f5bc1547.png)
+![image](https://user-images.githubusercontent.com/40962778/95699635-a0db7f80-0c62-11eb-8bf1-e6b0ea0e231b.png)
 ![image](https://user-images.githubusercontent.com/40962778/95680655-dba8cd80-0bf8-11eb-8c77-a3d99ab17400.png)
 ![image](https://user-images.githubusercontent.com/40962778/95680666-fb3ff600-0bf8-11eb-85d5-03dc5a4d2726.png)
 ![image](https://user-images.githubusercontent.com/40962778/95699563-67a30f80-0c62-11eb-96e8-2df5c101d0bc.png)
