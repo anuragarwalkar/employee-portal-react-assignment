@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`<App /> should render <App /> Component 1`] = `ShallowWrapper {}`;
-
-exports[`<App /> should render <App /> if user is not authenticated 1`] = `ShallowWrapper {}`;
-
-exports[`<App /> should render <App /> if user is not authenticated 2`] = `ShallowWrapper {}`;
