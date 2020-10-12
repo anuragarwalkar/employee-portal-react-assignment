@@ -22,7 +22,7 @@ const authSuccess = (state: AuthState, action: actionType) => {
 }
 
 const authLogout = (state: AuthState) => {
-    return updateObject(state, { token: '', userId: '', userName: ''});
+    return updateObject(state, { token: '', fullName: ''});
 }
 
 const authFailed = (state: AuthState, action: actionType) => {

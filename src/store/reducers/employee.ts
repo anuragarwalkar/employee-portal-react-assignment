@@ -16,7 +16,7 @@ const updateLoading = (state: EmployeeState) => {
 } 
 
 const fetchEmployeesSuccess = (state: EmployeeState, action: actionType) => {
-    const { payload: { employees, totalPages, currentPage , } } = action;
+    const { payload: { employees, totalPages, currentPage } } = action;
     return updateObject(state, { employees, totalPages, currentPage, loading: false});
 }
 
