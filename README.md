@@ -25,5 +25,7 @@ Used GitHub Action to test and build the code before merging and pushing the cod
 ![image](https://user-images.githubusercontent.com/40962778/95680650-cfbd0b80-0bf8-11eb-81fc-7bb1f5bc1547.png)
 ![image](https://user-images.githubusercontent.com/40962778/95680655-dba8cd80-0bf8-11eb-8c77-a3d99ab17400.png)
 ![image](https://user-images.githubusercontent.com/40962778/95680666-fb3ff600-0bf8-11eb-85d5-03dc5a4d2726.png)
-![image](https://user-images.githubusercontent.com/40962778/95680673-02670400-0bf9-11eb-9b0a-fd075ea1e483.png)
+![image](https://user-images.githubusercontent.com/40962778/95699563-67a30f80-0c62-11eb-96e8-2df5c101d0bc.png)
+
+
 
