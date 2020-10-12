@@ -19,6 +19,7 @@ Hosted On MongoCloud `mongodb+srv://anurag:<passowrd>@cluster0-mbclo.gcp.mongodb
 ## Continuous Intigration And Continuous Deployment (Firebase & GitHub Actions)
 Used GitHub Action to test and build the code before merging and pushing the code to the master branch and used firebase to deploy UI changes. 
 ![image](https://user-images.githubusercontent.com/40962778/95698345-455bc280-0c5f-11eb-9c5c-cc0a7324ea70.png)
+![image](https://user-images.githubusercontent.com/40962778/95700794-8525a880-0c65-11eb-8b9b-5e5bc5191c94.png)
 
 
 ## Screenshots (Destop)
