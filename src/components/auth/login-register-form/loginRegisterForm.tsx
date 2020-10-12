@@ -12,7 +12,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 
 const environment = process.env.REACT_APP_API_PATH;
 
-const LogInRegister = ({ isSignIn = false, togglePage, auth, loading, signInWithGoogle }: {togglePage: () => void, isSignIn: boolean, auth: any, loading: boolean, signInWithGoogle: () => void}) => {
+export const LogInRegister = ({ isSignIn = false, togglePage, auth, loading, signInWithGoogle }: {togglePage: () => void, isSignIn: boolean, auth: any, loading: boolean, signInWithGoogle: () => void}) => {
   const classes = useStyles();
   
   const [controls, setControls] = useState(authForm);
